@@ -37,7 +37,12 @@ export async function fetchLatestOptionChainData(): Promise<OptionChainData | nu
 
 export async function triggerOptionChainScrape(): Promise<OptionChainData | null> {
   try {
-    // Call the API route to scrape and store option chain data
+    console.log("Triggering option chain scrape...");
+
+    // Call the API route to scrape and store option chain data with a longer timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60-second timeout
+
     const response = await fetch("/api/scrape-option-chain", {
       method: "GET",
       headers: {
@@ -45,6 +50,9 @@ export async function triggerOptionChainScrape(): Promise<OptionChainData | null
       },
       // Add cache: 'no-store' to prevent caching
       cache: "no-store",
+      signal: controller.signal,
+    }).finally(() => {
+      clearTimeout(timeoutId);
     });
 
     if (!response.ok) {
@@ -60,6 +68,16 @@ export async function triggerOptionChainScrape(): Promise<OptionChainData | null
     if (!result.data) {
       console.error("Invalid API response format:", result);
       throw new Error("Invalid API response format");
+    }
+
+    // Check if we got mock data or real data
+    if (result.data.isMockData) {
+      console.warn("Received mock data from API:", result.message);
+      console.warn("Error:", result.error);
+    } else if (result.isRecentData) {
+      console.info("Using recent real data from database:", result.message);
+    } else {
+      console.info("Successfully fetched fresh real-time data");
     }
 
     return result.data as OptionChainData;

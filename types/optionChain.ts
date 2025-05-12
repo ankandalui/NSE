@@ -35,4 +35,7 @@ export interface OptionChainData {
   underlyingValue: number;
   options: OptionData[];
   isMockData?: boolean; // Flag to indicate if this is mock data
+  error?: string; // Error message if scraping failed
+  errorTime?: string; // Timestamp when the error occurred
+  isRecentData?: boolean; // Flag to indicate if this is recent data from the database
 }
