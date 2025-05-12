@@ -17,8 +17,8 @@ import { OptionChainData } from "@/types/optionChain";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // Disable SSR for queries to prevent hydration mismatches
-      suspense: false,
+      // Set default options for queries
+      refetchOnWindowFocus: false,
     },
   },
 });

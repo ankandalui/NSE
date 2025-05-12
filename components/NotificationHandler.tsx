@@ -40,7 +40,7 @@ export default function NotificationHandler() {
     const unsubscribe = onMessageListener();
 
     // Listen for messages and update notification state
-    if (typeof unsubscribe === "function") {
+    if (typeof unsubscribe === "function" && messaging) {
       onMessage(messaging, (payload) => {
         if (payload?.notification) {
           setNotification({
