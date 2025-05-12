@@ -17,14 +17,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
+  // During SSR and initial client render, just render children
+  // This prevents hydration mismatches
   if (!mounted) {
     return <>{children}</>;
   }
 
+  // Once the component has mounted on the client, we can safely render
+  // client-side only components
   return (
     <>
       {children}
-      <Toaster />
+      <Toaster position="top-right" toastOptions={{ duration: 5000 }} />
       <NotificationHandler />
     </>
   );

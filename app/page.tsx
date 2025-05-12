@@ -28,14 +28,21 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    // Set mounted state after a short delay to ensure hydration is complete
+    const timer = setTimeout(() => {
+      setIsMounted(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
+  // During SSR and initial hydration, render a placeholder with the same structure
+  // but no content to avoid hydration mismatches
   if (!isMounted) {
-    return null;
+    return <div suppressHydrationWarning></div>;
   }
 
-  return <>{children}</>;
+  return <div suppressHydrationWarning>{children}</div>;
 }
 
 function OptionChainApp() {
@@ -279,16 +286,7 @@ export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
       <ClientOnly>
-        {/* Add NotificationHandler component */}
-        <div>
-          <OptionChainApp />
-          {/* We'll dynamically import the NotificationHandler to avoid SSR issues */}
-          {typeof window !== "undefined" && (
-            <div id="notification-container" className="hidden">
-              {/* This will be populated client-side */}
-            </div>
-          )}
-        </div>
+        <OptionChainApp />
       </ClientOnly>
     </QueryClientProvider>
   );
