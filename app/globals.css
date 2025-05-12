@@ -24,3 +24,156 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Option Chain Table Styles */
+.option-chain-table {
+  @apply min-w-full border-collapse;
+}
+
+/* Header styles */
+.option-chain-table th {
+  @apply px-2 py-2 text-xs border border-gray-300 dark:border-gray-600 cursor-pointer font-bold text-center;
+  background-color: #5a4099;
+  /* NSE purple color */
+  color: white;
+  font-size: 0.8rem;
+}
+
+/* Call option header */
+.option-chain-table .call-header {
+  background-color: #2c3e50;
+  /* Dark blue for calls */
+  color: white;
+}
+
+/* Put option header */
+.option-chain-table .put-header {
+  background-color: #c0392b;
+  /* Dark red for puts */
+  color: white;
+}
+
+/* Cell styles */
+.option-chain-table td {
+  @apply px-2 py-1 border border-gray-300 dark:border-gray-600 text-right;
+  color: #000;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* Row styles */
+.option-chain-table tr.even {
+  @apply bg-white dark:bg-gray-800;
+}
+
+.option-chain-table tr.odd {
+  @apply bg-gray-50 dark:bg-gray-700;
+}
+
+/* Call section cells */
+.option-chain-table .call-cell {
+  @apply bg-blue-100 dark:bg-blue-900/50 text-black dark:text-white;
+}
+
+/* Put section cells */
+.option-chain-table .put-cell {
+  @apply bg-red-100 dark:bg-red-900/50 text-black dark:text-white;
+}
+
+/* Value styling */
+.option-chain-table .positive-value {
+  @apply text-green-700 dark:text-green-400 font-bold;
+}
+
+.option-chain-table .negative-value {
+  @apply text-red-700 dark:text-red-400 font-bold;
+}
+
+/* Strike price column */
+.option-chain-table .strike-price {
+  @apply px-2 py-1 text-sm border text-center font-bold;
+  background-color: #5a4099;
+  /* NSE purple color */
+  color: white;
+}
+
+/* Add green/red indicators for in-the-money options */
+.option-chain-table tr.in-the-money-call .call-cell {
+  @apply bg-green-100 dark:bg-green-900/30;
+}
+
+.option-chain-table tr.in-the-money-put .put-cell {
+  @apply bg-red-100 dark:bg-red-900/30;
+}
+
+/* Selectors styling */
+.nse-selector {
+  @apply border border-gray-300 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-white;
+  min-width: 150px;
+}
+
+.nse-selector-container {
+  @apply flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center;
+}
+
+.nse-selector-label {
+  @apply text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+}
+
+.nse-selector-group {
+  @apply flex flex-col;
+}
+
+/* NSE header styling */
+.nse-header {
+  @apply flex items-center gap-2 text-2xl font-bold;
+  color: #5a4099;
+  /* NSE purple color */
+}
+
+.nse-logo {
+  @apply rounded-full overflow-hidden;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ff9933, #ffffff, #138808);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #5a4099;
+}
+
+/* Underlying value styling */
+.underlying-value {
+  @apply text-lg font-bold flex items-center gap-2;
+}
+
+.value-up {
+  @apply text-green-600;
+}
+
+.value-down {
+  @apply text-red-600;
+}
+
+.value-neutral {
+  @apply text-gray-600;
+}
+
+/* Arrow icons */
+.arrow-up {
+  @apply inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #22c55e;
+}
+
+.arrow-down {
+  @apply inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #ef4444;
+}
