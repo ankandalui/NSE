@@ -97,7 +97,7 @@ async function retryApiCall<T>(
   maxRetries: number = 3,
   initialDelay: number = 1000
 ): Promise<T> {
-  let lastError: any;
+  let lastError: Error | unknown;
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {

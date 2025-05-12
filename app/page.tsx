@@ -234,8 +234,8 @@ function OptionChainApp() {
           </div>
           <p className="text-xs mt-1">
             The application is currently using simulated data because it
-            couldn't connect to NSE's servers. This may be due to network issues
-            or NSE's anti-scraping measures.
+            couldn&apos;t connect to NSE&apos;s servers. This may be due to
+            network issues or NSE&apos;s anti-scraping measures.
           </p>
         </div>
       )}

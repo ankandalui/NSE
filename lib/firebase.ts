@@ -18,7 +18,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Initialize Firebase Messaging - only in browser environment
-let messaging: any = null;
+import type { Messaging } from "firebase/messaging";
+let messaging: Messaging | null = null;
 
 // Only initialize messaging in browser environment
 if (typeof window !== "undefined") {
